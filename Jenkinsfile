@@ -12,8 +12,8 @@ pipeline {
                 script {
                 sh "echo 'Compile Code!'"
                 // Run Maven on a Unix agent.
-                //sh "./mvnw clean compile -e"
-                sh "mvn clean compile -e"
+                sh "./mvnw clean compile -e"
+                //sh "mvn clean compile -e"
                 }
             }
         }
@@ -22,8 +22,8 @@ pipeline {
                 script {
                 sh "echo 'Test Code!'"
                 // Run Maven on a Unix agent.
-                // sh "./mvnw clean test -e"
-                sh "mvn clean test -e"
+                sh "./mvnw clean test -e"
+                //sh "mvn clean test -e"
                 }
             }
         }
@@ -32,8 +32,8 @@ pipeline {
                 script {
                 sh "echo 'Build .Jar!'"
                 // Run Maven on a Unix agent.
-                // sh "./mvnw clean package -e"
-                sh "mvn clean package -e"
+                 sh "./mvnw clean package -e"
+                //sh "mvn clean package -e"
                 }
             }
         }
