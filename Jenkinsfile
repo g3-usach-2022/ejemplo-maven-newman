@@ -15,7 +15,7 @@ pipeline {
         }
         stage("Sonar: Análisis SonarQube"){
             steps {
-                withSonarQubeEnv("sonarQube"){
+                withSonarQubeEnv('sonarqube') {
                     sh "echo 'Calling sonar Service in another docker container!'"
                     // Run Maven on a Unix agent to execute Sonar.
                     sh './mvnw clean verify sonar:sonar'
