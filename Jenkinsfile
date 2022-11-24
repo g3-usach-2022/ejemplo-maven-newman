@@ -62,7 +62,7 @@ pipeline {
                     groupId: 'Grupo3',
                     version: "${nPomVersion}",
                     repository: 'maven-releases',
-                    credentialsId: 'artefactos-admin',
+                    credentialsId: 'nexus_admin',
                     artifacts: [
                         [artifactId: "archivo",
                         classifier: 'lab4',
