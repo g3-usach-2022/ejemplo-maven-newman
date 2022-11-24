@@ -68,26 +68,21 @@ pipeline {
         }
            stage("Paso 5: Subir Artefacto a Nexus"){
             steps {
-                script{
-                    nexusPublisher nexusInstanceId: 'nexus',
-                        nexusRepositoryId: 'maven-usach-ceres',
-                        packages: [
-                            [$class: 'MavenPackage',
-                                mavenAssetList: [
-                                    [classifier: '',
-                                    extension: 'jar',
-                                    filePath: 'build/DevOpsUsach2020-0.0.1.jar'
-                                ]
-                            ],
-                                mavenCoordinate: [
-                                    artifactId: 'DevOpsUsach2020',
-                                    groupId: 'com.devopsusach2020',
-                                    packaging: 'jar',
-                                    version: '0.0.1'
-                                ]
-                            ]
-                        ]
-                }
+                nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    nexusUrl: 'nexus:8081',
+                    groupId: 'com.devopsusach2020',
+                    version: '0.0.1',
+                    repository: 'maven-usach-ceres',
+                    credentialsId: 'nexus_admin',
+                    artifacts: [
+                        [artifactId: "DevOpsUsach2020",
+                        classifier: '',
+                         file: 'build/DevOpsUsach2020-0.0.1.jar',
+                        type: 'jar']
+                    ]
+                )
             }
         }
         stage("Paso 6: Descargar Nexus"){
