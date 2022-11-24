@@ -70,7 +70,7 @@ pipeline {
             steps {
                 script{
                     nexusPublisher nexusInstanceId: 'nexus',
-                        nexusRepositoryId: 'diploDevops',
+                        nexusRepositoryId: 'maven-usach-ceres',
                         packages: [
                             [$class: 'MavenPackage',
                                 mavenAssetList: [
