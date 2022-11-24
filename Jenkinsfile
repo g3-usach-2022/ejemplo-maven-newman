@@ -59,12 +59,12 @@ pipeline {
                     nexusVersion: 'nexus3',
                     protocol: 'http',
                     nexusUrl: 'nexus:8081',
-                    groupId: 'Grupo3',
+                    groupId: 'ejemplo',
                     version: "${nPomVersion}",
-                    repository: 'maven-releases',
+                    repository: 'diploDevops',
                     credentialsId: 'nexus_admin',
                     artifacts: [
-                        [artifactId: "archivo",
+                        [artifactId: "DevOpsUsach2020",
                         classifier: 'lab4',
                          file: 'build/DevOpsUsach2020-'+ "${nPomVersion}" + '.jar',
                         type: 'jar']
