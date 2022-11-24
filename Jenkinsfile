@@ -44,21 +44,34 @@ pipeline {
                 withSonarQubeEnv('sonarqube') {
                     sh "echo 'Calling sonar Service in another docker container!'"
                     // Run Maven on a Unix agent to execute Sonar.
-                    sh './mvnw clean verify sonar:sonar'
+                    //sh './mvnw clean verify sonar:sonar'
+                    sh './mvnw clean verify sonar:sonar -Dsonar.projectKey=grupo-3 -Dsonar.projectName=Grupo3-Lab4'
                 }
             }
         }
+        stage('Nexus'){        
+            steps {
+                script{
+                    nPomVersion = readMavenPom().getVersion()
+                    env.STAGE='Nexus'
+                }
+                nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    nexusUrl: 'nexus:8081',
+                    groupId: 'Grupo3',
+                    version: "${nPomVersion}",
+                    repository: 'maven-releases',
+                    credentialsId: 'artefactos-admin',
+                    artifacts: [
+                        [artifactId: "archivo",
+                        classifier: 'lab4',
+                         file: 'build/DevOpsUsach2020-'+ "${nPomVersion}" + '.jar',
+                        type: 'jar']
+                    ]
+                )
+            }
+        }
     }
-    post {
-        always {
-            sh "echo 'fase always executed post'"
-        }
-        success {
-            sh "echo 'fase success'"
-        }
 
-        failure {
-            sh "echo 'fase failure'"
-        }
-    }
 }
