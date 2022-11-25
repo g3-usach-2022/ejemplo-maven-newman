@@ -87,9 +87,12 @@ pipeline {
         }
         stage("Paso 6: Descargar Nexus"){
             steps {
-                script{
-                    sh ' curl -X GET -u admin:$NEXUS_PASSWORD "http://nexus:8081/repository/maven-usach-ceres/com/devopsusach2020/DevOpsUsach2020/0.0.1/DevOpsUsach2020-0.0.1.jar" -O'
+                withCredentials([usernamePassword(credentialsId: 'nexus_admin', passwordVariable: 'NXS_PASSWORD', usernameVariable: 'NXS_USERNAME')]) {
+                    sh ' curl -X GET -u $NXS_USERNAME:$NXS_PASSWORD "http://nexus:8081/repository/maven-usach-ceres/com/devopsusach2020/DevOpsUsach2020/0.0.1/DevOpsUsach2020-0.0.1.jar" -O'
                 }
+                // script{
+                //     sh ' curl -X GET -u admin:$NEXUS_PASSWORD "http://nexus:8081/repository/maven-usach-ceres/com/devopsusach2020/DevOpsUsach2020/0.0.1/DevOpsUsach2020-0.0.1.jar" -O'
+                // }
             }
         }
          stage("Paso 7: Levantar Artefacto Jar en server Jenkins"){
