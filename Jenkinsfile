@@ -11,18 +11,18 @@ pipeline {
     }
     stages {
         
-        stage("Paso 0: Download Code and checkout"){
-            steps {
-                script{
-                    checkout(
-                            [$class: 'GitSCM',
-                            //Acá reemplazar por el nonbre de branch
-                            branches: [[name: "feature/sonar" ]],
-                            //Acá reemplazar por su propio repositorio
-                            userRemoteConfigs: [[url: 'https://github.com/diplodevops/ejemplo-maven-ceres.git']]])
-                }
-            }
-        }
+        // stage("Paso 0: Download Code and checkout"){
+        //     steps {
+        //         script{
+        //             checkout(
+        //                     [$class: 'GitSCM',
+        //                     //Acá reemplazar por el nonbre de branch
+        //                     branches: [[name: "feature/sonar" ]],
+        //                     //Acá reemplazar por su propio repositorio
+        //                     userRemoteConfigs: [[url: 'https://github.com/diplodevops/ejemplo-maven-ceres.git']]])
+        //         }
+        //     }
+        // }
      
         stage("Paso 1: Build && Test"){
             steps {
