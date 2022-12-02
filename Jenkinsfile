@@ -27,6 +27,7 @@ pipeline {
         stage("Paso 1: Build && Test"){
             steps {
                 script{
+                    sh 'cd ejemplo-maven'
                     sh "echo 'Build && Test!'"
                     sh "./mvnw clean package -e"    
                 }
