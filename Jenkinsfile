@@ -11,7 +11,7 @@ pipeline {
     }
     stages {
         
-        stage("Paso 0: Download Code and checkout"){
+        /* stage("Paso 0: Download Code and checkout"){
             steps {
                 script{
                     checkout(
@@ -22,7 +22,7 @@ pipeline {
                             userRemoteConfigs: [[url: 'https://github.com/Bfal10/ejemplo-maven.git']]])
                 }
             }
-        }
+        } */
      
         stage("Paso 1: Build && Test"){
             steps {
