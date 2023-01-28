@@ -1,9 +1,10 @@
 # Build stage
-FROM maven:3.6.3-jdk-11 AS build
-COPY . .
-RUN mvn clean package -e -DskipTest
+FROM openjdk:11-jdk as build
+COPY DevOpsUsach2020-1.0.10-lab5.jar /app/
+RUN cd /app && jar -xvf DevOpsUsach2020-1.0.10-lab5.jar
 
 # Run stage
-FROM openjdk:11-jre
-COPY --from=build *.jar app.jar
-CMD ["java", "-jar", "app.jar"]
+FROM openjdk:11-jre-slim
+COPY --from=build /app/ /app/
+CMD ["java", "-jar", "/app/DevOpsUsach2020-1.0.10-lab5.jar"]
+
